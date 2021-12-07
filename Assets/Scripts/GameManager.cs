@@ -59,5 +59,8 @@ public class GameManager : MonoBehaviourPunCallbacks
             Debug.Log("Joined room!!");
         }
     }
-
+    public override void OnJoinRoomFailed(short returnCode, string message)
+    {
+        Debug.LogWarningFormat("Joined room failde: {0}", message);
+    }
 }
