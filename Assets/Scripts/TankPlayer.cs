@@ -5,9 +5,8 @@ using Photon.Pun;
 
 namespace Tanks
 {
-    public class TankPlayer : MonoBehaviour
+    public class TankPlayer : MonoBehaviourPunCallbacks
     {
-        PhotonView photonView;
         //Reference to tank's movement script, used to disable and enable control.
         private Complete.TankMovement m_Movement;
         //Reference to tank's shooting script, used to disable and enable control.
