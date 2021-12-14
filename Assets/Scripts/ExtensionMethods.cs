@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Tanks
 {
+    /// <summary>
+    /// use template ,and accroding name and type to find child.
+    /// </summary>
     public static class ExtensionMethods
     {
         public static T FindAnyChild<T>(this Transform trans, string name) where T : Component

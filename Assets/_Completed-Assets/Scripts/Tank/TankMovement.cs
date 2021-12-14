@@ -45,7 +45,6 @@ namespace Complete
             }
         }
 
-
         private void OnDisable ()
         {
             // When the tank is turned off, set it to kinematic so it stops moving.
@@ -58,7 +57,6 @@ namespace Complete
             }
         }
 
-
         private void Start ()
         {
             // The axes names are based on player number.
@@ -68,7 +66,6 @@ namespace Complete
             // Store the original pitch of the audio source.
             m_OriginalPitch = m_MovementAudio.pitch;
         }
-
 
         private void Update ()
         {
