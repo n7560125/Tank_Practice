@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Tanks;
 
 namespace Complete
 {
@@ -20,9 +21,16 @@ namespace Complete
         private float m_OriginalPitch;              // The pitch of the audio source at the start of the scene.
         private ParticleSystem[] m_particleSystems; // References to all the particles systems used by the Tanks
 
+        private string m_TurretTurnAxisName;
+        private float m_TurretTurnInputValue;
+        private GameObject m_Turret;
+        public float m_TurretTurnSpeed = 600f;
+
+
         private void Awake ()
         {
             m_Rigidbody = GetComponent<Rigidbody> ();
+            m_Turret = this.transform.FindAnyChild<Transform>("TankTurret").gameObject;
         }
 
 
@@ -62,6 +70,9 @@ namespace Complete
             // The axes names are based on player number.
             m_MovementAxisName = "Vertical";
             m_TurnAxisName = "Horizontal";
+            m_TurretTurnAxisName = "Turn";
+            m_TurretTurnInputValue = 0f;
+
 
             // Store the original pitch of the audio source.
             m_OriginalPitch = m_MovementAudio.pitch;
@@ -72,8 +83,8 @@ namespace Complete
             // Store the value of both input axes.
             m_MovementInputValue = Input.GetAxis (m_MovementAxisName);
             m_TurnInputValue = Input.GetAxis (m_TurnAxisName);
-
-            EngineAudio ();
+            m_TurretTurnInputValue = Input.GetAxis(m_TurretTurnAxisName);
+            EngineAudio();
         }
 
 
@@ -110,6 +121,7 @@ namespace Complete
             // Adjust the rigidbodies position and orientation in FixedUpdate.
             Move ();
             Turn ();
+            TurrentTurn();
         }
 
 
@@ -133,6 +145,17 @@ namespace Complete
 
             // Apply this rotation to the rigidbody's rotation.
             m_Rigidbody.MoveRotation (m_Rigidbody.rotation * turnRotation);
+        }
+
+        private void TurrentTurn()
+        {
+            if (m_Turret == null)
+            {
+                return;
+            }
+            float turrentturn = m_TurretTurnInputValue * m_TurretTurnSpeed ;
+            m_Turret.transform.Rotate(m_Turret.transform.up * turrentturn);
+
         }
     }
 }
