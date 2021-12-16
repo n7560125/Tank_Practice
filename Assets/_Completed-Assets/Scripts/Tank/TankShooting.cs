@@ -111,6 +111,7 @@ namespace Complete
                  Instantiate(m_Shell, pos, rot) as Rigidbody;
             shellInstance.velocity = force * fo;
             m_CurrentLaunchForce = m_MinLaunchForce;
+
         }
     }
 }
