@@ -21,6 +21,7 @@ namespace Complete
         private float m_OriginalPitch;              // The pitch of the audio source at the start of the scene.
         private ParticleSystem[] m_particleSystems; // References to all the particles systems used by the Tanks
 
+        //declare turretturning variable;
         private string m_TurretTurnAxisName;
         private float m_TurretTurnInputValue;
         private GameObject m_Turret;
@@ -30,6 +31,7 @@ namespace Complete
         private void Awake ()
         {
             m_Rigidbody = GetComponent<Rigidbody> ();
+            //gameobject of TankTurret;
             m_Turret = this.transform.FindAnyChild<Transform>("TankTurret").gameObject;
         }
 
@@ -42,6 +44,7 @@ namespace Complete
             // Also reset the input values.
             m_MovementInputValue = 0f;
             m_TurnInputValue = 0f;
+            m_TurretTurnInputValue = 0f;
 
             // We grab all the Particle systems child of that Tank to be able to Stop/Play them on Deactivate/Activate
             // It is needed because we move the Tank when spawning it, and if the Particle System is playing while we do that
@@ -71,8 +74,6 @@ namespace Complete
             m_MovementAxisName = "Vertical";
             m_TurnAxisName = "Horizontal";
             m_TurretTurnAxisName = "Turn";
-            m_TurretTurnInputValue = 0f;
-
 
             // Store the original pitch of the audio source.
             m_OriginalPitch = m_MovementAudio.pitch;
@@ -146,13 +147,13 @@ namespace Complete
             // Apply this rotation to the rigidbody's rotation.
             m_Rigidbody.MoveRotation (m_Rigidbody.rotation * turnRotation);
         }
-
         private void TurrentTurn()
         {
             if (m_Turret == null)
             {
                 return;
             }
+            //declare speed and rotate.
             float turrentturn = m_TurretTurnInputValue * m_TurretTurnSpeed ;
             m_Turret.transform.Rotate(m_Turret.transform.up * turrentturn);
 
